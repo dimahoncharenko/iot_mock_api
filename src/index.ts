@@ -20,7 +20,7 @@ const server = http.createServer(app);
 
 export const io = new Server(server, {
     cors: {
-        origin: ["http://localhost:4200", "https://iot-widgets.web.app/"],
+        origin: "*",
         methods: ["GET", "POST"]
     }
 });
