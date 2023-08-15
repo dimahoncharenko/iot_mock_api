@@ -59,4 +59,14 @@ export class MockService {
 
         if (this.charge <= 55.00) this.charge = 170.00;
     }
+
+    getAllParams() {
+        return {
+            power: this.power,
+            consumption: this.consumption,
+            charge: this.charge,
+            production: this.production,
+            temperature: this.temperature
+        }
+    }
 } 
