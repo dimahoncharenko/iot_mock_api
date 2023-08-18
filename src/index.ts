@@ -25,7 +25,7 @@ export const io = new Server(server, {
     }
 });
  
-setInterval(() => {
+const paramsInterval = setInterval(() => {
     mock.updateParams();
 
     io.emit("get_params", {
@@ -34,9 +34,18 @@ setInterval(() => {
         consumption: mock.consumption,
         charge: mock.charge,
         production: mock.production
-    })
+    });
+    
 
  }, 1000);
+
+ const radarsInterval = setInterval(() => {
+    mock.updateRadars();
+
+    io.emit("get_radars", {
+        radars: mock.getAllRadars()
+    })
+ }, 5000);
 
 io.on("connection", (socket) => {
     console.log(`User with the id ${socket.id} has just connected!`);
@@ -45,5 +54,11 @@ io.on("connection", (socket) => {
         console.log(`User with the id: ${socket.id} disconnected!`);
     })
 });
+
+io.on("disconnection", () => {
+    console.log("Disconnected!");
+    clearInterval(paramsInterval);
+    clearInterval(radarsInterval);
+})
 
 server.listen(process.env.PORT, () => console.log(`Server is ready at http:localhost:${app.get("PORT")}`));

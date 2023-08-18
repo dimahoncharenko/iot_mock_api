@@ -1,13 +1,16 @@
 export class MockService {
     private _instance?: MockService;
     updateTime = 130000;
-    intervalIndex: NodeJS.Timer;
+    temperatureInterval: NodeJS.Timer;
 
-    temperature = 18;
-    power = 0;
-    consumption = 1.37;
+    temperature: Temperature = 18;
+    power: Power = 0;
+    consumption: Consumption = 1.37;
     charge = 170.00;
     production = 0;
+
+    radars: Radar[] = [];
+    radarsInterval: NodeJS.Timer;
 
     private constructor(initValues: Partial<{
         temperature: number;
@@ -28,9 +31,9 @@ export class MockService {
         const steps = this.updateTime / updateIntervalTime;
         const increment = 100 / steps;
 
-        clearInterval(this.intervalIndex);
-        this.intervalIndex = setInterval(() => {
-
+        clearInterval(this.temperatureInterval);
+        this.temperatureInterval = setInterval(() => {
+            
         if (this.temperature >= newTemperature) this.temperature -= increment;
         else if (this.temperature <= newTemperature) this.temperature += increment;
 
@@ -68,5 +71,14 @@ export class MockService {
             production: this.production,
             temperature: this.temperature
         }
+    }
+
+    updateRadars() {
+        this.radars.length >= 5 && this.radars.shift(); 
+        this.radars.push([this.power, this.consumption, this.temperature, new Date().toLocaleDateString()]);
+    }
+
+    getAllRadars() {
+        return this.radars;
     }
 } 
