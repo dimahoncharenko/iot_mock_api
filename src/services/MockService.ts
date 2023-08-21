@@ -75,7 +75,7 @@ export class MockService {
 
     updateRadars() {
         this.radars.length >= 5 && this.radars.shift(); 
-        this.radars.push([this.power, this.consumption, this.temperature, new Date().toLocaleDateString()]);
+        this.radars.push([this.power, this.consumption, this.temperature, new Date().toLocaleTimeString()]);
     }
 
     getAllRadars() {

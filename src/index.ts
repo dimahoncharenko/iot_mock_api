@@ -44,7 +44,8 @@ const paramsInterval = setInterval(() => {
 
     io.emit("get_radars", {
         radars: mock.getAllRadars()
-    })
+    });
+   
  }, 5000);
 
 io.on("connection", (socket) => {
