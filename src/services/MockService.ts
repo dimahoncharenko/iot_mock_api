@@ -1,5 +1,6 @@
 export class MockService {
     private _instance?: MockService;
+    private max_radars = 10;
     updateTime = 130000;
     temperatureInterval: NodeJS.Timer;
 
@@ -74,7 +75,7 @@ export class MockService {
     }
 
     updateRadars() {
-        this.radars.length >= 5 && this.radars.shift(); 
+        this.radars.length >= this.max_radars && this.radars.shift(); 
         this.radars.push([this.power, this.consumption, this.temperature, new Date().toLocaleTimeString()]);
     }
 

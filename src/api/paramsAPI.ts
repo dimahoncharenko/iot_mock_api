@@ -7,6 +7,7 @@ const mock = MockService.prototype.instance();
 
 router.post("/temperature/adjust", (req, res) => {
     const { temp } = req.body;
+    console.log("DD");
     mock.adjustTemperature(temp);
 
     return true;
