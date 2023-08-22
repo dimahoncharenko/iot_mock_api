@@ -1,3 +1,5 @@
+import type { Temperature, Power, Consumption, Radar } from "../utils";
+
 export class MockService {
     private _instance?: MockService;
     private max_radars = 10;

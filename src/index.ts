@@ -40,13 +40,13 @@ const paramsInterval = setInterval(() => {
   });
 }, 1000);
 
-// const radarsInterval = setInterval(() => {
-//   mock.updateRadars();
+const radarsInterval = setInterval(() => {
+  mock.updateRadars();
 
-//   io.emit("get_radars", {
-//     radars: mock.getAllRadars(),
-//   });
-// }, 24 * 60 * 60 * 100);
+  io.emit("get_radars", {
+    radars: mock.getAllRadars(),
+  });
+}, 24 * 60 * 60 * 100);
 
 io.on("connection", (socket) => {
   console.log(`User with the id ${socket.id} has just connected!`);
@@ -59,7 +59,7 @@ io.on("connection", (socket) => {
 io.on("disconnection", () => {
   console.log("Disconnected!");
   clearInterval(paramsInterval);
-//   clearInterval(radarsInterval);
+  clearInterval(radarsInterval);
 });
 
 server.listen(process.env.PORT, () =>
